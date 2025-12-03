@@ -15,6 +15,8 @@ This template has been updated for:
 
 ## Game Features
 
+Play the game here: [Dolomites Skier Game](https://dobutler.github.io/Dolomites/)
+
 - **Tiled Map Integration**: The game now loads a custom Tiled map (`Dilek's_Ski_Resort_Map.json`) with embedded tileset.
 - **Multiple Layers**: Renders multiple layers from the Tiled map: `Terrain`, `Shadows`, `Objects`, and `Lift`.
 - **Skier Sprite**: A skier sprite (`tile_0083.png`) moves continuously down the slope.
