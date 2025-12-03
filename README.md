@@ -1,6 +1,7 @@
-# Phaser Vite Template
+# Phaser Vite Template - Skier Game
 
-This is a Phaser 3 project template that uses Vite for bundling. It supports hot-reloading for quick development workflow and includes scripts to generate production-ready builds.
+This is a Phaser 3 project template that uses Vite for bundling, adapted to create a simple skier game.
+It supports hot-reloading for quick development workflow and includes scripts to generate production-ready builds.
 
 **[This Template is also available as a TypeScript version.](https://github.com/phaserjs/template-vite-ts)**
 
@@ -11,7 +12,16 @@ This template has been updated for:
 - [Phaser 3.90.0](https://github.com/phaserjs/phaser)
 - [Vite 6.3.1](https://github.com/vitejs/vite)
 
-![screenshot](screenshot.png)
+
+## Game Features
+
+- **Tiled Map Integration**: The game now loads a custom Tiled map (`Dilek's_Ski_Resort_Map.json`) with embedded tileset.
+- **Multiple Layers**: Renders multiple layers from the Tiled map: `Terrain`, `Shadows`, `Objects`, and `Lift`.
+- **Skier Sprite**: A skier sprite (`tile_0083.png`) moves continuously down the slope.
+- **Looping Movement**: The skier loops back to the top of the screen when it reaches the bottom, creating an endless slope.
+- **Horizontal Control**: Players can control the skier horizontally using the left and right arrow keys.
+- **Direct Game Start**: The game now bypasses the main menu and starts directly into the game scene.
+
 
 ## Requirements
 
@@ -36,44 +46,32 @@ The local development server runs on `http://localhost:8080` by default. Please 
 
 Once the server is running you can edit any of the files in the `src` folder. Vite will automatically recompile your code and then reload the browser.
 
-## Template Project Structure
+## Project Structure
 
-We have provided a default project structure to get you started. This is as follows:
+The current project structure is as follows:
 
-| Path                         | Description                                                |
-|------------------------------|------------------------------------------------------------|
-| `index.html`                 | A basic HTML page to contain the game.                     |
-| `public/assets`              | Game sprites, audio, etc. Served directly at runtime.      |
-| `public/style.css`           | Global layout styles.                                      |
-| `src/main.js`                | Application bootstrap.                                     |
-| `src/game`                   | Folder containing the game code.                           |
-| `src/game/main.js`           | Game entry point: configures and starts the game.          |
-| `src/game/scenes`            | Folder with all Phaser game scenes.                        | 
+| Path                                         | Description                                                |
+|----------------------------------------------|------------------------------------------------------------|
+| `index.html`                                 | A basic HTML page to contain the game.                     |
+| `public/assets/map`                          | Contains the Tiled map JSON and tileset image.             |
+| `public/assets/sprites`                      | Contains the skier sprite image.                           |
+| `public/assets`                              | Other game sprites, audio, etc. Served directly at runtime. |
+| `public/style.css`                           | Global layout styles.                                      |
+| `src/main.js`                                | Application bootstrap.                                     |
+| `src/game`                                   | Folder containing the game code.                           |
+| `src/game/main.js`                           | Game entry point: configures and starts the game.          |
+| `src/game/scenes`                            | Folder with all Phaser game scenes.                        | 
 
 ## Handling Assets
 
 Vite supports loading assets via JavaScript module `import` statements.
 
-This template provides support for both embedding assets and also loading them from a static folder. To embed an asset, you can import it at the top of the JavaScript file you are using it in:
+This template provides support for both embedding assets and also loading them from a static folder. For this project:
 
-```js
-import logoImg from './assets/logo.png'
-```
+-   The **Tiled map JSON** (`Dilek's_Ski_Resort_Map.json`) and its corresponding **tileset image** (`tilemap.png`) are located in `public/assets/Tiled` and `public/assets/Tilemap` respectively.
+-   The **skier sprite image** (`tile_0083.png`) is located in `public/assets/Tiles`.
 
-To load static files such as audio files, videos, etc place them into the `public/assets` folder. Then you can use this path in the Loader calls within Phaser:
-
-```js
-preload ()
-{
-    //  This is an example of an imported bundled image.
-    //  Remember to import it at the top of this file
-    this.load.image('logo', logoImg);
-
-    //  This is an example of loading a static image
-    //  from the public/assets folder:
-    this.load.image('background', 'assets/bg.png');
-}
-```
+These assets are loaded in `src/game/scenes/Preloader.js`.
 
 When you issue the `npm run build` command, all static assets are automatically copied to the `dist/assets` folder.
 
