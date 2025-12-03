@@ -45,6 +45,25 @@ export class Game extends Scene
 
         // Enable keyboard input
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Initialize touch controls
+        this.touchLeft = false;
+        this.touchRight = false;
+
+        this.input.on('pointerdown', (pointer) => {
+            if (pointer.x < this.cameras.main.width / 2) {
+                this.touchLeft = true;
+                this.touchRight = false;
+            } else {
+                this.touchLeft = false;
+                this.touchRight = true;
+            }
+        });
+
+        this.input.on('pointerup', () => {
+            this.touchLeft = false;
+            this.touchRight = false;
+        });
     }
 
     update ()
@@ -55,12 +74,12 @@ export class Game extends Scene
             this.skier.y = 0;
         }
 
-        // Horizontal movement control
-        if (this.cursors.left.isDown)
+        // Horizontal movement control for both keyboard and touch
+        if (this.cursors.left.isDown || this.touchLeft)
         {
             this.skier.setVelocityX(-SKIER_HORIZONTAL_SPEED);
         }
-        else if (this.cursors.right.isDown)
+        else if (this.cursors.right.isDown || this.touchRight)
         {
             this.skier.setVelocityX(SKIER_HORIZONTAL_SPEED);
         }
